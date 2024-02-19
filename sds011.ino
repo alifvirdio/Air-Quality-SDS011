@@ -1,19 +1,47 @@
 #include <Arduino.h>
 #include <SDS011.h>
 #include <LiquidCrystal_I2C.h>
+#include <WiFi.h>
 
 int coloumnsLcd = 20;
 int rowsLcd = 4;
 
-// Inisialisasi objek SDS011
+//konek wifi ssid dan pw
+const char* ssid = "MeteoJuanda";
+const char* password = "hiluxpertek";
+
+//init objek
 SDS011 sds;
 LiquidCrystal_I2C lcd(0x27, coloumnsLcd, rowsLcd);
 
 void setup() {
-    Serial.begin(9600); // Inisialisasi komunikasi serial dengan kecepatan 9600 bps
-    sds.begin(16, 17);  // Mulai komunikasi dengan sensor menggunakan pin GPIO16 (RX) dan GPIO17 (TX)
+    Serial.begin(9600);
+    sds.begin(16, 17);  //GPIO16 (RX) dan GPIO17 (TX)
     lcd.init();
     lcd.backlight();
+
+    lcd.setCursor(0,0); //pojok kiri atas
+    lcd.print("Connecting..");
+    Serial.print("Connecting to ");
+    Serial.println(ssid);
+    WiFi.begin(ssid, password);
+
+    while (WiFi.status() != WL_CONNECTED) {
+      delay(500);
+      Serial.print("Tidak Terhubung \n");
+    }
+    // Print local IP address and start web server
+    Serial.println("");
+    Serial.println("WiFi connected.");
+    Serial.println("IP address: ");
+    Serial.println(WiFi.localIP());
+
+    lcd.setCursor(0, 2);
+    lcd.print("Connected!");
+    lcd.setCursor(0, 3);
+    lcd.print(WiFi.localIP());
+    delay(5000);
+    lcd.clear();
 }
 
 void loop() {
@@ -27,12 +55,12 @@ void loop() {
     int error = sds.read(&pm25, &pm10);
 
     if (!error) {
-        Serial.print("PM2.5:");
-        Serial.print(pm25);
-        Serial.print(" µg/m³ ");
-        Serial.print("PM10 :");
-        Serial.print(pm10);
-        Serial.println(" µg/m³");
+        // Serial.print("PM2.5:");
+        // Serial.print(pm25);
+        // Serial.print(" µg/m³ ");
+        // Serial.print("PM10 :");
+        // Serial.print(pm10);
+        // Serial.println(" µg/m³");
         //lcd
         lcd.setCursor(0,2);
         lcd.print("PM 2.5: ");
