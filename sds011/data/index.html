@@ -75,7 +75,7 @@ setInterval(function ( ) {
   };
   xhttp.open("GET", "/pm25", true);
   xhttp.send();
-}, 30000 ) ;
+}, 500 );
 
 var chartH = new Highcharts.Chart({
   chart:{ renderTo:'chart-pm10' },
@@ -114,7 +114,7 @@ setInterval(function ( ) {
   };
   xhttp.open("GET", "/pm10", true);
   xhttp.send();
-}, 30000 ) ;
+}, 500 ) ;
 
 // var chartP = new Highcharts.Chart({
 //   chart:{ renderTo:'chart-pressure' },
