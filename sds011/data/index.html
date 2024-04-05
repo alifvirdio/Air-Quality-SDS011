@@ -10,7 +10,7 @@ copies or substantial portions of the Software. -->
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <style>
     body {
-      background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20210625/pngtree-sun-watercolor-landscape-desktop-wallpaper-image_733321.jpg");
+      background-image: url("https://wallpapercave.com/wp/wp4930571.jpg");
       background-repeat: no-repeat;
       background-size: cover;
     }
@@ -75,7 +75,7 @@ setInterval(function ( ) {
   };
   xhttp.open("GET", "/pm25", true);
   xhttp.send();
-}, 500 );
+}, 1000);
 
 var chartH = new Highcharts.Chart({
   chart:{ renderTo:'chart-pm10' },
@@ -114,7 +114,7 @@ setInterval(function ( ) {
   };
   xhttp.open("GET", "/pm10", true);
   xhttp.send();
-}, 500 ) ;
+}, 1000 );
 
 // var chartP = new Highcharts.Chart({
 //   chart:{ renderTo:'chart-pressure' },
